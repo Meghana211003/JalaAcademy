@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JALA Academy Login & Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <style>
+    .menu-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .menu-scrollbar::-webkit-scrollbar-thumb {
+      background-color: rgba(59, 130, 246, 0.5);
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-[#d3d7de] min-h-screen flex flex-col">
+
+  <!-- LOGIN PAGE -->
+  <div id="loginPage" class="flex flex-col items-center pt-10 px-4 flex-grow">
+    <h1 class="font-extrabold text-2xl text-gray-700">JALA Academy</h1>
+    <p class="text-center text-gray-700 mt-2">Use the below details to login</p>
+    <p class="text-center text-gray-700 text-sm mt-1">Email : training@jalaacademy.com</p>
+    <p class="text-center text-gray-700 text-sm mb-2">Password : jobprogram</p>
+    <p class="bg-yellow-300 font-bold text-center text-xs px-2 py-1 max-w-[350px]">
+      Learn everything on Real-Time Scenarios. FREE for all.
+    </p>
+
+    <form id="loginForm" class="bg-white mt-4 p-6 w-full max-w-sm" autocomplete="off">
+      <p class="text-center text-gray-500 mb-4 text-sm">Sign in</p>
+      <div class="relative mb-3">
+        <input
+          id="emailInput"
+          type="text"
+          placeholder="Email or Mobile No"
+          class="w-full border border-gray-300 rounded px-3 py-2 pr-9 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+          required
+        />
+        <i class="fas fa-envelope absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+      </div>
+      <div class="relative mb-3">
+        <input
+          id="passwordInput"
+          type="password"
+          placeholder="Password"
+          class="w-full border border-gray-300 rounded px-3 py-2 pr-9 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+          required
+        />
+        <i class="fas fa-lock absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+      </div>
+      <div class="flex items-center mb-4">
+        <input
+          id="remember"
+          type="checkbox"
+          class="w-4 h-4 border border-gray-300 rounded text-blue-600 focus:ring-blue-500"
+        />
+        <label for="remember" class="ml-2 text-sm text-gray-700 select-none">Remember Me</label>
+        <button
+          type="submit"
+          class="ml-auto bg-blue-600 text-white text-sm px-4 py-1 rounded hover:bg-blue-700"
+        >
+          Sign In
+        </button>
+      </div>
+      <p class="text-center text-gray-600 text-xs mb-4">- OR -</p>
+      <button
+        type="button"
+        class="w-full bg-blue-700 text-white text-sm py-2 rounded hover:bg-blue-800"
+        onclick="alert('Please contact admin to reset password')"
+      >
+        Forgot Password
+      </button>
+      <p class="text-center mt-4 text-blue-700 text-sm cursor-pointer" onclick="alert('Admin login not implemented')">Admin Login</p>
+      <p id="errorMsg" class="text-center text-red-600 text-xs mt-2 hidden">Invalid email or password</p>
+    </form>
+  </div>
+
+  <!-- DASHBOARD PAGE -->
+  <div id="dashboardPage" class="hidden flex flex-col min-h-screen bg-gray-100">
+    <header class="bg-blue-600 text-white flex items-center p-4">
+      <!-- Hamburger menu button -->
+      <button id="menuBtn" class="text-white text-2xl focus:outline-none">
+        <i class="fas fa-bars"></i>
+      </button>
+      <h1 class="ml-4 font-bold text-lg">JALA Academy Dashboard</h1>
+      <button
+        id="logoutBtn"
+        class="ml-auto bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm"
+        title="Logout"
+      >
+        Logout
+      </button>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+      <!-- Sidebar Menu -->
+      <nav
+        id="sidebarMenu"
+        class="bg-white w-64 p-4 space-y-4 border-r border-gray-300 overflow-y-auto menu-scrollbar hidden md:block"
+      >
+        <ul>
+          <li>
+            <a href="#" class="block py-2 px-3 rounded hover:bg-blue-100">Home</a>
+          </li>
+          <li>
+            <button
+              class="w-full flex justify-between items-center py-2 px-3 rounded hover:bg-blue-100 focus:outline-none"
+              data-toggle="employeeSubmenu"
+            >
+              Employee
+              <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <ul
+              id="employeeSubmenu"
+              class="pl-4 mt-1 space-y-1 hidden text-gray-700"
+            >
+              <li><a href="#" class="block py-1 px-2 rounded hover:bg-blue-200">Create</a></li>
+              <li><a href="#" class="block py-1 px-2 rounded hover:bg-blue-200">Search</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <button
+              class="w-full flex justify-between items-center py-2 px-3 rounded hover:bg-blue-100 focus:outline-none"
+              data-toggle="moreSubmenu"
+            >
+              More
+              <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <ul
+              id="moreSubmenu"
+              class="pl-4 mt-1 space-y-1 hidden text-gray-700"
+            >
+              <li><a href="#" class="block py-1 px-2 rounded hover:bg-blue-200">Multiple Tabs</a></li>
+              <li><a href="#" class="block py-1 px-2 rounded hover:bg-blue-200">Menu</a></li>
+              <li><a href="#" class="block py-1 px-2 rounded hover:bg-blue-200">Autocomplete</a></li>
+              <li><a href="#" class="block py-1 px-2 rounded hover:bg-blue-200">Collapsible Content</a></li>
+              <li><a href="#" class="block py-1 px-2 rounded hover:bg-blue-200">Images</a></li>
+              <li><a href="#" class="block py-1 px-2 rounded hover:bg-blue-200">Slider</a></li>
+              <li><a href="#" class="block py-1 px-2 rounded hover:bg-blue-200">Tooltips</a></li>
+              <li><a href="#" class="block py-1 px-2 rounded hover:bg-blue-200">Popups</a></li>
+              <li><a href="#" class="block py-1 px-2 rounded hover:bg-blue-200">Links</a></li>
+              <li><a href="#" class="block py-1 px-2 rounded hover:bg-blue-200">CSS Properties</a></li>
+              <li><a href="#" class="block py-1 px-2 rounded hover:bg-blue-200">iFrames</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#" class="block py-2 px-3 rounded hover:bg-blue-100">Settings</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Main content -->
+      <main class="flex-1 p-6">
+        <h2 class="text-gray-700 text-xl font-semibold mb-4">Welcome to JALA Academy Dashboard</h2>
+        <p>Select options from the menu.</p>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const loginPage = document.getElementById('loginPage');
+    const dashboardPage = document.getElementById('dashboardPage');
+    const loginForm = document.getElementById('loginForm');
+    const errorMsg = document.getElementById('errorMsg');
+
+    const emailInput = document.getElementById('emailInput');
+    const passwordInput = document.getElementById('passwordInput');
+
+    // Valid credentials
+    const validEmail = 'training@jalaacademy.com';
+    const validPassword = 'jobprogram';
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      if(email === validEmail && password === validPassword) {
+        // Clear error
+        errorMsg.classList.add('hidden');
+
+        // Show dashboard and hide login
+        loginPage.classList.add('hidden');
+        dashboardPage.classList.remove('hidden');
+
+        // Clear inputs
+        loginForm.reset();
+      } else {
+        errorMsg.classList.remove('hidden');
+      }
+    });
+
+    // Hamburger menu toggle for sidebar (on small screens)
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebarMenu = document.getElementById('sidebarMenu');
+
+    menuBtn.addEventListener('click', () => {
+      sidebarMenu.classList.toggle('hidden');
+    });
+
+    // Submenu toggles
+    const submenuButtons = document.querySelectorAll("button[data-toggle]");
+    submenuButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const submenuId = button.getAttribute("data-toggle");
+        const submenu = document.getElementById(submenuId);
+        if (submenu) {
+          const isHidden = submenu.classList.contains("hidden");
+          submenu.classList.toggle("hidden");
+
+          // Rotate arrow icon
+          const icon = button.querySelector("i.fas.fa-chevron-down");
+          if (icon) {
+            if (isHidden) {
+              icon.classList.add("rotate-180");
+            } else {
+              icon.classList.remove("rotate-180");
+            }
+          }
+        }
+      });
+    });
+
+    // Logout button
+    const logoutBtn = document.getElementById('logoutBtn');
+    logoutBtn.addEventListener('click', () => {
+      dashboardPage.classList.add('hidden');
+      loginPage.classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
